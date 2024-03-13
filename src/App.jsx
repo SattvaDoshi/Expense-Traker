@@ -1,38 +1,67 @@
-import React from 'react'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import Layout, { dashBoardLoader } from './Layout'
-import Error from './pages/Error'
-import Dashboard from './pages/Dashboard'
-import { logoutAction } from './action/logout.js'
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import Main, { mainLoader } from "./layouts/Main";
+import { logoutAction } from "./actions/logout";
+import { deleteBudget } from "./actions/deleteBudget";
+
+import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
+import Error from "./pages/Error";
+import BudgetPage, { budgetAction, budgetLoader } from "./pages/BudgetPage";
+import ExpensesPage, {
+  expensesAction,
+  expensesLoader,
+} from "./pages/ExpensesPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
-    loader: dashBoardLoader,
+    element: <Main />,
+    loader: mainLoader,
     errorElement: <Error />,
     children: [
       {
-        index:true,
-        element: <Dashboard/>,
-        loader: dashBoardLoader,
+        index: true,
+        element: <Dashboard />,
+        loader: dashboardLoader,
+        action: dashboardAction,
         errorElement: <Error />,
       },
       {
-        path:"/logout",
-        action : logoutAction
-      }
-    ]
-  }
+        path: "budget/:id",
+        element: <BudgetPage />,
+        loader: budgetLoader,
+        action: budgetAction,
+        errorElement: <Error />,
+        children: [
+          {
+            path: "delete",
+            action: deleteBudget,
+          },
+        ],
+      },
+      {
+        path: "expenses",
+        element: <ExpensesPage />,
+        loader: expensesLoader,
+        action: expensesAction,
+        errorElement: <Error />,
+      },
+      {
+        path: "logout",
+        action: logoutAction,
+      },
+    ],
+  },
+]);
 
-])
-
-const App = () => {
+function App() {
   return (
-    <div>
+    <div className="App">
       <RouterProvider router={router} />
+      <ToastContainer />
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
