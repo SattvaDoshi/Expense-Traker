@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Main, { mainLoader } from "./layouts/Main";
 import { logoutAction } from "./actions/logout";
 import { deleteBudget } from "./actions/deleteBudget";
-
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import Dashboard, { dashboardAction, dashboardLoader } from "./pages/Dashboard";
 import Error from "./pages/Error";
 import BudgetPage, { budgetAction, budgetLoader } from "./pages/BudgetPage";
@@ -58,6 +58,7 @@ const router = createBrowserRouter([
 function App() {
   return (
     <div className="App">
+      <SpeedInsights/>
       <RouterProvider router={router} />
       <ToastContainer />
     </div>
