@@ -12,6 +12,7 @@ import ExpensesPage, {
   expensesAction,
   expensesLoader,
 } from "./pages/ExpensesPage";
+import { Analytics } from '@vercel/analytics/react';
 
 const router = createBrowserRouter([
   {
@@ -59,6 +60,7 @@ function App() {
   return (
     <div className="App">
       <SpeedInsights/>
+      <Analytics/>
       <RouterProvider router={router} />
       <ToastContainer />
     </div>
