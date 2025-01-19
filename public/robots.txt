@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+
+# Ensure the PWA manifest and icons are accessible
+Allow: /manifest.json
+Allow: /icons/
+
+# Disallow unnecessary paths
+Disallow: /node_modules/
+Disallow: /src/
+Disallow: /dist/
+Disallow: /build/
+Disallow: /api/
+
+# Sitemap location (if available)
+Sitemap: https://expense-traker-zeta.vercel.app/
